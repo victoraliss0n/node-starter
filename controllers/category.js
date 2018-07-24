@@ -10,8 +10,6 @@ const deleteAll = async ({Category}, req, res) => {
 }
 
 const create = async ({Category}, req, res) => {
-    console.log(req.body)
-    console.log(req.params)
     const category = await Category.create(req.body)
     res.send(category)
 }
