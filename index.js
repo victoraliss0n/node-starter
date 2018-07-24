@@ -17,7 +17,7 @@ app.use(require('cors')())
 const port = process.env.PORT || 5000
 
 const configureServer = async() => {
-    await model.sequelize.sync( {force: true} )
+    await model.sequelize.sync( {force: false} )
     const isValidServer = await app.listen(port)
     if (isValidServer) {
         console.log(`Connected - Port: ${port}`)

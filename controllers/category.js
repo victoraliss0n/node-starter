@@ -31,7 +31,7 @@ const editForm = async ({Category}, req, res) => {
 }
 
 const editOne = async ({Category}, req, res) => {
-    const category = Category.update({ name: req.body.name }, { where: {id: req.params.id} });
+    const category = Category.update({ name: req.body.name, subcategory: req.body.subcategory }, { where: {id: req.params.id} });
     res.send( { category } )
 }
 
