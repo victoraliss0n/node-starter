@@ -5,8 +5,8 @@ const all = async ({Category}, req, res) => {
 }
 
 const deleteAll = async ({Category}, req, res) => {
-    await Category.destroy({where: {}, truncate: true})
-    res.redirect('/')  
+    const category = await Category.destroy({where: {}, truncate: true})
+    res.send({category})
 }
 
 const create = async ({Category}, req, res) => {
@@ -30,9 +30,6 @@ const editForm = async ({Category}, req, res) => {
 }
 
 const editOne = async ({Category}, req, res) => {
-    console.log(req.body)
-    console.log(req.params)
-
     const category = Category.update({ name: req.body.name }, { where: {id: req.params.id} });
     res.send( { category } )
 }

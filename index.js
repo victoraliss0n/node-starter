@@ -2,7 +2,6 @@
 const express = require('express')
 const path = require('path')
 const app = express()
-const port = process.env.PORT || 3000
 const categories = require('./routes/category')
 const model = require('./models/index')
 const bodyParser = require('body-parser')
