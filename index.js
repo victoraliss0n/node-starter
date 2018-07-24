@@ -11,8 +11,10 @@ app.use(express.static('public'))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs')
 app.use('/', categories)
+const port = process.env.PORT || 3000
 
 const configureServer = async() => {
+    console.log(port)
     await model.sequelize.sync( {force: false} )
     const isValidServer = await app.listen(port)
     if (isValidServer) {
