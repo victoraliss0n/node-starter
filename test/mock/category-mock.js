@@ -1,5 +1,5 @@
 
-const teste = {
+const databaseTest = {
         username: 'root',
         password: null,
         database: 'dbcategoriestest',
@@ -8,7 +8,7 @@ const teste = {
       }
     
     const Sequelize = require('sequelize')
-    const sequelize = new Sequelize(teste)
+    const sequelize = new Sequelize(databaseTest)
     const CategoryMock = sequelize.define('CategoryMock', {
         name: Sequelize.STRING
     })
