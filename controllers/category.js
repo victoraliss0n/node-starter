@@ -22,7 +22,7 @@ const destroyOne = async ({Category}, req, res) => {
             id: req.params.id
          }
     })
-    res.send(category)
+    res.send({category})
 }
 
 const editForm = async ({Category}, req, res) => {
