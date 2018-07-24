@@ -11,7 +11,8 @@ const deleteAll = async ({Category}, req, res) => {
 
 const create = async ({Category}, req, res) => {
     const category = await Category.create(req.body)
-    res.send(category)
+    const categories = await Category.findAll()
+    res.send(categories)
 }
 
 const destroyOne = async ({Category}, req, res) => {
