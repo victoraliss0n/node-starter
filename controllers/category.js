@@ -1,12 +1,12 @@
 
 const all = async ({Category}, req, res) => {
     const categories = await Category.findAll()
-    res.send({categories})
+    res.send(categories)
 }
 
 const deleteAll = async ({Category}, req, res) => {
     const category = await Category.destroy({where: {}, truncate: true})
-    res.send({category})
+    res.send(category)
 }
 
 const create = async ({Category}, req, res) => {
@@ -21,7 +21,7 @@ const destroyOne = async ({Category}, req, res) => {
             id: req.params.id
          }
     })
-    res.send( { category } )
+    res.send(category)
 }
 
 const editForm = async ({Category}, req, res) => {
