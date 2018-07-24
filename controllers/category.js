@@ -6,10 +6,12 @@ const all = async ({Category}, req, res) => {
 
 const deleteAll = async ({Category}, req, res) => {
     const category = await Category.destroy({where: {}, truncate: true})
-    res.send(category)
+    res.send({category})
 }
 
 const create = async ({Category}, req, res) => {
+    console.log(req.body)
+    console.log(req.params)
     const category = await Category.create(req.body)
     res.send(category)
 }
