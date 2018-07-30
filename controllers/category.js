@@ -1,18 +1,32 @@
 
 const all = async ({Category}, req, res) => {
-    const categories = await Category.findAll()
-    res.send(categories)
+    try {
+        const categories = await Category.findAll()
+        res.send(categories)
+    } catch(error) {
+        res.send({success: false, errors: Object.keys(error.errors)})
+    }
 }
 
 const deleteAll = async ({Category}, req, res) => {
-    const category = await Category.destroy({where: {}, truncate: true})
-    res.send({category})
+    try {
+        const category = await Category.destroy({where: {}, truncate: true})
+        res.send({category})
+    } catch(error) {
+        res.send({success: false, errors: Object.keys(error.errors)})
+    }
 }
 
 const create = async ({Category}, req, res) => {
-    const category = await Category.create(req.body)
-    const categories = await Category.findAll()
-    res.send(categories)
+
+    try {
+        const category = await Category.create(req.body)
+        await Category.create({name: req.body.subcategory, categories_pk: category.get('id')});
+        const categories = await Category.findAll()
+        res.send(categories)
+    } catch (error) {
+        res.send({success: false, errors: Object.keys(error.errors)})
+    }
 }
 
 const destroyOne = async ({Category}, req, res) => {
@@ -22,7 +36,8 @@ const destroyOne = async ({Category}, req, res) => {
             id: req.params.id
          }
     })
-    res.send({category})
+    const categories = await Category.findAll()
+    res.send(categories)
 }
 
 const editForm = async ({Category}, req, res) => {
