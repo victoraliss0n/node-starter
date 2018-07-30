@@ -1,20 +1,20 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add sequelize-mocking
+  /usr/local/bin/node /usr/local/bin/yarn
 
 PATH: 
-  /Users/victoralisson/.rvm/gems/ruby-2.5.1/bin:/Users/victoralisson/.rvm/gems/ruby-2.5.1@global/bin:/Users/victoralisson/.rvm/rubies/ruby-2.5.1/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/victoralisson/.rvm/gems/ruby-2.5.1/bin:/Users/victoralisson/.rvm/gems/ruby-2.5.1@global/bin:/Users/victoralisson/.rvm/rubies/ruby-2.5.1/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/victoralisson/.rvm/bin:/Users/victoralisson/.rvm/bin
+  /Users/victoralisson/.rvm/gems/ruby-2.5.1/bin:/Users/victoralisson/.rvm/gems/ruby-2.5.1@global/bin:/Users/victoralisson/.rvm/rubies/ruby-2.5.1/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/victoralisson/.rvm/bin
 
 Yarn version: 
   1.6.0
 
 Node version: 
-  10.1.0
+  9.5.0
 
 Platform: 
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, mkdir '/Users/victoralisson/Desktop/back-end-node-js/node_modules/body-parser/node_modules/qs'
+  Error: EACCES: permission denied, mkdir '/Users/victoralisson/Desktop/back/back-end-node-js/node_modules/body-parser/node_modules/qs'
 
 npm manifest: 
   {
@@ -32,6 +32,7 @@ npm manifest:
     "dependencies": {
       "body-parser": "^1.18.3",
       "chai": "^4.1.2",
+      "cors": "^2.8.4",
       "ejs": "^2.6.1",
       "express": "^4.16.3",
       "istanbul": "^0.4.5",

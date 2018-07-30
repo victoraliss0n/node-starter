@@ -11,8 +11,8 @@ app.use(bodyParser.json())
 app.use(express.static('public'))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs')
-app.use('/', categories)
 app.use(require('cors')())
+app.use('/', categories)
 
 const port = process.env.PORT || 5000
 
