@@ -1,4 +1,6 @@
-Inspiration from the rails
+# mvc-node.js
+
+Inspiration from the rails.
 
 We can describe the MVC architecture in simple words:
 
