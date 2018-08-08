@@ -1,6 +1,4 @@
-#MVC
-
-#Inspiration from the rails
+Inspiration from the rails
 
 We can describe the MVC architecture in simple words:
 
