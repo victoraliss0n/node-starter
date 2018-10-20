@@ -1,5 +1,11 @@
-# mvc-node.js
+# Get started
 
-Inspiration from the rails.
+## Install
 
-Model–view–controller is an architectural pattern commonly used for developing user interfaces that divides an application into three interconnected parts. This is done to separate internal representations of information from the ways information is presented to and accepted from the user.
+```sh
+$ npm i
+```
+
+```sh
+$ npm start
+```
