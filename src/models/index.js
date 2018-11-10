@@ -4,7 +4,8 @@ const json = {
     password: null,
     database: 'dbcategories',
     host: '127.0.0.1',
-    dialect: 'mysql'
+    dialect: 'sqlite',
+    operatorsAliases: false
   }
 const Sequelize = require('sequelize')
 const sequelize = new Sequelize(json)

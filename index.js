@@ -2,8 +2,8 @@
 const express = require('express')
 const path = require('path')
 const app = express()
-const categories = require('./routes/category')
-const model = require('./models/index')
+const categories = require('./src/routes/category')
+const model = require('./src/models/index')
 const bodyParser = require('body-parser')
 
 app.use(bodyParser.urlencoded( { extended: true } ))
@@ -14,10 +14,14 @@ app.set('view engine', 'ejs')
 app.use(require('cors')())
 app.use('/', categories)
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 12209
 
-const configureServer = async() => {
-    await model.sequelize.sync( {force: false} )
+const configureServer = async () => {
+    try {
+        await model.sequelize.sync( {force: false} )
+    } catch (error) {
+        console.log(error)
+    }
     const isValidServer = await app.listen(port)
     if (isValidServer) {
         console.log(`Connected - Port: ${port}`)
