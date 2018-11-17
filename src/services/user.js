@@ -14,4 +14,4 @@ const deleteRecord = async (User, id) => {
    return User
 }
 
-module.exports = { all, create, deleteRecord}
+module.exports = { all, create, deleteRecord }
