@@ -2,13 +2,13 @@
 const json = {
     username: 'root',
     password: null,
-    database: 'dbcategories',
+    database: 'database-users',
     host: '127.0.0.1',
     dialect: 'sqlite',
     operatorsAliases: false
   }
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize(json)
+const sequelize = new Sequelize(json) 
 
 const models = {}
 const fs = require('fs')
