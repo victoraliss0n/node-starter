@@ -1,5 +1,5 @@
 
-const all = async ({User}, req, res) => {
+export const all = async ({User}, req, res) => {
     try {
         const categories = await User.findAll()
         res.send(categories)
@@ -8,7 +8,7 @@ const all = async ({User}, req, res) => {
     }
 }
 
-const destroyAll = async ({User}, req, res) => {
+export const destroyAll = async ({User}, req, res) => {
     try {
        await User.destroy({where: {}, truncate: true})
         res.send({})
@@ -17,7 +17,7 @@ const destroyAll = async ({User}, req, res) => {
     }
 } 
 
-const create = async ({User}, req, res) => {
+export const create = async ({User}, req, res) => {
 
     try {
         const category = await User.create(req.body)
@@ -29,7 +29,7 @@ const create = async ({User}, req, res) => {
     }
 }
 
-const destroy = async ({User}, req, res) => {
+export const destroy = async ({User}, req, res) => {
 
     await User.destroy({ 
         where: {
@@ -40,9 +40,9 @@ const destroy = async ({User}, req, res) => {
     res.send(users)
 }
 
-const update = async ({User}, req, res) => {
+export const update = async ({User}, req, res) => {
     const user = User.update({ name: req.body.name, subcategory: req.body.subcategory }, { where: {id: req.params.id} });
     res.json(user);
 }
 
-module.exports = { create, all, destroyAll, destroy, update }
+// module.exports = { create, all, destroyAll, destroy, update }

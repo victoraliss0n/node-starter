@@ -1,10 +1,10 @@
-const logger = require('./src/helpers/logger');
+import logger from './src/helpers/logger'
 import express from 'express'
-const path = require('path')
+import path from 'path'
 const app = express()
-const user = require('./src/routes/user')
-const model = require('./src/models/index')
-const bodyParser = require('body-parser')
+import user from './src/routes/user'
+import model from './src/models/index'
+import bodyParser from 'body-parser'
 
 app.use(bodyParser.urlencoded( { extended: true } ))
 app.use(bodyParser.json())
@@ -22,6 +22,10 @@ app.use('/', user)
     } catch (error) {
         logger.error(error)
     }
-    await app.listen(port)
-   console.log('Connected: ', port);
+    try {
+        await app.listen(port)
+        logger.info(`CONNECTED: ${port}`)
+    } catch (error) {
+        logger.error(error)
+    }
  })()
