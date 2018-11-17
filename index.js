@@ -1,5 +1,5 @@
-
-const express = require('express')
+const logger = require('./src/helpers/logger');
+import express from 'express'
 const path = require('path')
 const app = express()
 const user = require('./src/routes/user')
@@ -20,8 +20,8 @@ app.use('/', user)
     try {
         await model.sequelize.sync( {force: true} )
     } catch (error) {
-        console.log(error)
+        logger.error(error)
     }
     await app.listen(port)
-    console.log(`Connected - Port: ${port}`)
+   console.log('Connected: ', port);
  })()
