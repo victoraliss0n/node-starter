@@ -1,10 +1,10 @@
-
-const express = require('express')
-const path = require('path')
+import logger from './src/helpers/logger'
+import express from 'express'
+import path from 'path'
 const app = express()
-const user = require('./src/routes/user')
-const model = require('./src/models/index')
-const bodyParser = require('body-parser')
+import user from './src/routes/user'
+import model from './src/models/index'
+import bodyParser from 'body-parser'
 
 app.use(bodyParser.urlencoded( { extended: true } ))
 app.use(bodyParser.json())
@@ -20,8 +20,12 @@ app.use('/', user)
     try {
         await model.sequelize.sync( {force: true} )
     } catch (error) {
-        console.log(error)
+        logger.error(error)
     }
-    await app.listen(port)
-    console.log(`Connected - Port: ${port}`)
+    try {
+        await app.listen(port)
+        logger.info(`CONNECTED: ${port}`)
+    } catch (error) {
+        logger.error(error)
+    }
  })()

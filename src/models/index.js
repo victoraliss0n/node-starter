@@ -21,4 +21,4 @@ fs.readdirSync(__dirname)
   })
 
 
-module.exports = { sequelize, models }
+export default { sequelize, models }
