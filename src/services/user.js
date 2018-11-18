@@ -13,4 +13,4 @@ const destroy = async (User, id) => {
    return User
 }
 
-module.exports = { all, create, destroy }
+export default { all, create, destroy }
