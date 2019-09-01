@@ -1,39 +1,15 @@
 {
   "name": "sequelize-node-starter",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index.js",
-    "test": "./node_modules/.bin/mocha --reporter spec",
-    "coverage": "find ./ -name '*.test.js' | xargs node_modules/.bin/istanbul cover _mocha * -- --reporter spec"
+    "start": "sucrase-node test"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "chai": "^4.1.2",
-    "cors": "^2.8.4",
-    "dotenv": "^6.1.0",
-    "ejs": "^2.6.1",
-    "express": "^4.16.3",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.2.0",
-    "mysql2": "^1.5.3",
-    "nodemon": "^1.18.3",
-    "sequelize": "^4.38.0",
-    "sequelize-cli": "^5.4.0",
-    "sinon": "^6.1.4",
-    "sqlite3": "^4.0.3",
-    "winston": "^3.1.0"
-  },
+  "repository": "https://github.com/victoraliss0n/sequelize-node-starter",
+  "author": "Victor Alisson <victoralissont5@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/node": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
-    "@babel/register": "^7.0.0",
-    "babel-preset-env": "^1.7.0",
-    "sequelize-mock": "^0.10.2"
+    "eslint": "^6.3.0",
+    "sucrase": "^3.10.1"
   }
 }
