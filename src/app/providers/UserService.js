@@ -6,17 +6,27 @@ export default class UserService {
   }
 
   async create(body) {
-    body.email = null
-    const { email } = body
-    const userExists = await this.User.findOne({
+    const userExists = await User.findOne({
       where: {
-        email,
+        email: body.email,
       },
     })
     if (userExists instanceof User) {
       throw Error('User already exists')
     }
     const user = await this.User.create(body)
+    return user
+  }
+
+  async findOne({ email }) {
+    const user = await User.findOne({
+      where: {
+        email,
+      },
+    })
+    if (!(user instanceof User)) {
+      throw Error('User not found')
+    }
     return user
   }
 }
