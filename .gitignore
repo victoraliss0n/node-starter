@@ -1,13 +1,10 @@
-# database 
-127.0.0.1
-
 # Logs
 logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
+mysql-data
 # Runtime data
 pids
 *.pid
