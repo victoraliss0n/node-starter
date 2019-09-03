@@ -7,8 +7,20 @@ export default class UserController {
 
   async create(req, res) {
     try {
-      const user = await this.UserService.create(req.body)
-      res.send(user)
+      const { id, email, provider } = await this.UserService.create(req.body)
+      res.json({ id, email, provider })
+    } catch (error) {
+      res.status(400).send({ error: error.message })
+    }
+  }
+
+  async update(req, res) {
+    try {
+      const { id, email, provider } = await this.UserService.update(
+        req.userId,
+        req.body
+      )
+      res.json({ id, email, provider })
     } catch (error) {
       res.status(400).send({ error: error.message })
     }
