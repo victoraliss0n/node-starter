@@ -1,4 +1,5 @@
 import User from '../models/User'
+import * as UserValidation from '../validations/user.validation'
 
 export default class UserService {
   constructor(InjectableUser = User) {
@@ -20,6 +21,10 @@ export default class UserService {
 
   async update(id, body) {
     const { email, oldPassword } = body
+    const isValidInputs = await UserValidation.validateUpdate(body)
+    if (!isValidInputs) {
+      throw Error('Validation fails')
+    }
     const user = await User.findByPk(id)
     if (email !== user.email) {
       const userExists = await User.findOne({ where: { email } })

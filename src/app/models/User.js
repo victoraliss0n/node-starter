@@ -27,6 +27,10 @@ class User extends Model {
     const isValid = await bcrypt.compare(password, this.password_hash)
     return isValid
   }
+
+  static associate(models) {
+    this.belongsTo(models.File, { foreignKey: 'avatar_id' })
+  }
 }
 
 export default User

@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-export const validateUpdate = body => {
+export const validateUpdate = async body => {
   const schema = Yup.object().shape({
     name: Yup.string(),
     email: Yup.string().email(),
