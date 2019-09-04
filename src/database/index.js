@@ -4,9 +4,10 @@ import User from '../app/models/User'
 
 import databaseConfig from '../config/database'
 import File from '../app/models/File'
+import Appointment from '../app/models/Appointments'
 
 class Database {
-  constructor(Models = [User, File]) {
+  constructor(Models = [User, File, Appointment]) {
     this.Models = Models
     this.init()
   }
