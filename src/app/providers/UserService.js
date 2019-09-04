@@ -1,4 +1,5 @@
 import User from '../models/User'
+import File from '../models/File'
 import * as UserValidation from '../validations/user.validation'
 
 export default class UserService {
@@ -36,6 +37,25 @@ export default class UserService {
       throw Error('Invalid Password')
     const newUser = user.update(body)
     return newUser
+  }
+
+  async allProviders() {
+    try {
+      const users = await this.User.findAll({
+        where: {
+          provider: true,
+        },
+        include: [
+          {
+            model: File,
+            as: 'avatar',
+          },
+        ],
+      })
+      return users
+    } catch (error) {
+      throw Error('Internal Error')
+    }
   }
 
   async findOne({ email }) {

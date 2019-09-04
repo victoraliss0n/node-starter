@@ -25,4 +25,13 @@ export default class UserController {
       res.status(400).send({ error: error.message })
     }
   }
+
+  async allProviders(req, res) {
+    try {
+      const users = await this.UserService.allProviders()
+      res.json(users)
+    } catch (error) {
+      res.status(400).send({ error: error.message })
+    }
+  }
 }
