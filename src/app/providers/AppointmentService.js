@@ -1,5 +1,7 @@
-import { startOfHour, parseISO, isBefore } from 'date-fns'
+import { startOfHour, parseISO, isBefore, format } from 'date-fns'
+import pt from 'date-fns/locale/pt'
 import Appointment from '../models/Appointments'
+import Notification from '../schemas/Notification'
 import User from '../models/User'
 import File from '../models/File'
 import * as AppointmentValidation from '../validations/appointment.validation'
@@ -16,10 +18,10 @@ export default class AppointmentService {
     if (!isValid) {
       throw Error('Validation Fails')
     }
-    const user = await this.User.findOne({
+    const provider = await this.User.findOne({
       where: { id: provider_id, provider: true },
     })
-    if (!(user instanceof User)) {
+    if (!(provider instanceof User)) {
       throw Error('You can only create appointments with providers')
     }
     const hourStart = startOfHour(parseISO(date))
@@ -40,6 +42,16 @@ export default class AppointmentService {
       user_id,
       provider_id,
       date: hourStart,
+    })
+    const user = await User.findByPk(user_id)
+    const formattedDate = format(
+      hourStart,
+      "'dia' dd 'de' MMMM', ás' H:mm'h'",
+      { locale: pt }
+    )
+    await Notification.create({
+      content: `Novo agendamento de ${user.name} para o ${formattedDate}`,
+      user: user.id,
     })
     return appointment
   }
