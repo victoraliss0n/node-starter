@@ -10,7 +10,7 @@ services:
       MYSQL_USER: node-starter
       MYSQL_PASSWORD: node-starter
     ports:
-      - '3306:3306'
+      - '3309:3306'
     container_name: node-starter-mysql
 
   node-starter:
