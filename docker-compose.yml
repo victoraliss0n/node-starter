@@ -13,6 +13,14 @@ services:
       - '3309:3306'
     container_name: node-starter-mysql
 
+  mongodb:
+    image: mongo:latest
+    container_name: 'mongodb'
+    volumes:
+      - .:/usr/data
+    ports:
+      - 27017:27017
+
   node-starter:
     build: .
     command: yarn start
