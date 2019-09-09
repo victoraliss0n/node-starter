@@ -21,4 +21,16 @@ export default class AppointmentController {
       return res.status(400).send({ error: error.message })
     }
   }
+
+  async delete(req, res) {
+    try {
+      const result = await this.AppointmentService.delete(
+        req.params.id,
+        req.userId
+      )
+      return res.json(result)
+    } catch (error) {
+      return res.status(400).send({ error: error.message })
+    }
+  }
 }

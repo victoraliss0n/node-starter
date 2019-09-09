@@ -15,4 +15,10 @@ routes.get(
   appointmentController.all.bind(appointmentController)
 )
 
+routes.delete(
+  '/appointment/:id',
+  authMiddleware,
+  appointmentController.delete.bind(appointmentController)
+)
+
 export default routes

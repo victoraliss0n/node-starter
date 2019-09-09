@@ -1,10 +1,11 @@
-import { startOfHour, parseISO, isBefore, format } from 'date-fns'
+import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import Appointment from '../models/Appointments'
 import Notification from '../schemas/Notification'
 import User from '../models/User'
 import File from '../models/File'
 import * as AppointmentValidation from '../validations/appointment.validation'
+import MailHelper from '../helpers/MailHelper'
 
 export default class AppointmentService {
   constructor(InjectableAppointment = Appointment, InjectableUser = User) {
@@ -51,7 +52,7 @@ export default class AppointmentService {
     )
     await Notification.create({
       content: `Novo agendamento de ${user.name} para o ${formattedDate}`,
-      user: user.id,
+      user: provider_id,
     })
     return appointment
   }
@@ -60,7 +61,7 @@ export default class AppointmentService {
     if (page <= 0) {
       throw Error('Invalid page')
     }
-    const appointments = this.Appointment.findAll({
+    const appointments = await this.Appointment.findAll({
       where: {
         canceled_at: null,
         user_id: userId,
@@ -85,5 +86,33 @@ export default class AppointmentService {
       ],
     })
     return appointments
+  }
+
+  async delete(appointmentId, userId) {
+    const appointment = await Appointment.findByPk(appointmentId, {
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['name', 'email'],
+        },
+      ],
+    })
+    if (appointment.user_id !== userId) {
+      throw Error("You don't have permission to cancel this appointment")
+    }
+    const dateWithSub = subHours(appointment.date, 2)
+    if (isBefore(dateWithSub, new Date())) {
+      throw Error('You can only cancel appointments 2 hours in advance')
+    }
+    appointment.canceled_at = new Date()
+    await appointment.update()
+    const mail = new MailHelper()
+    await mail.sendMail({
+      to: `${appointment.provider.name} <${appointment.provider.email}>`,
+      subject: 'Agendamento cancelado',
+      text: 'Você tem um novo cancelamento',
+    })
+    return appointment
   }
 }

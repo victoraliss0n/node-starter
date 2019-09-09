@@ -9,5 +9,10 @@ routes.get(
   authMiddleware,
   notificationController.all.bind(notificationController)
 )
+routes.patch(
+  '/notification/:id',
+  authMiddleware,
+  notificationController.update.bind(notificationController)
+)
 
 export default routes

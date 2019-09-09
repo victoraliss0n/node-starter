@@ -21,4 +21,17 @@ export default class NotificationService {
       .limit(20)
     return notifications
   }
+
+  async update(id) {
+    const notification = await Notification.findByIdAndUpdate(
+      id,
+      {
+        read: true,
+      },
+      {
+        new: true,
+      }
+    )
+    return notification
+  }
 }
