@@ -1,5 +1,5 @@
 import MailHelper from '../helpers/MailHelper'
-import { format } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 import { pt } from 'date-fns/locale'
 
 export default class CancellationMail {
@@ -17,9 +17,13 @@ export default class CancellationMail {
       context: {
         provider: appointment.provider.name,
         user: appointment.user.name,
-        date: format(appointment.date, "'dia' dd 'de' MMMM', ás' H:mm'h'", {
-          locale: pt,
-        }),
+        date: format(
+          parseISO(appointment.date),
+          "'dia' dd 'de' MMMM', ás' H:mm'h'",
+          {
+            locale: pt,
+          }
+        ),
       },
     })
   }

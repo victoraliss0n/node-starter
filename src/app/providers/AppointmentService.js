@@ -5,12 +5,18 @@ import Notification from '../schemas/Notification'
 import User from '../models/User'
 import File from '../models/File'
 import * as AppointmentValidation from '../validations/appointment.validation'
-import MailHelper from '../helpers/MailHelper'
+import CancellationMail from '../jobs/CancellationMail'
+import Queue from '../queues/Queue'
 
 export default class AppointmentService {
-  constructor(InjectableAppointment = Appointment, InjectableUser = User) {
+  constructor(
+    InjectableAppointment = Appointment,
+    InjectableUser = User,
+    InjectableQueue = Queue
+  ) {
     this.Appointment = InjectableAppointment
     this.User = InjectableUser
+    this.Queue = new InjectableQueue()
   }
 
   async create(body) {
@@ -112,20 +118,7 @@ export default class AppointmentService {
     }
     appointment.canceled_at = new Date()
     await appointment.update()
-    const mail = new MailHelper()
-
-    await mail.sendMail({
-      to: `${appointment.provider.name} <${appointment.provider.email}>`,
-      subject: 'Appointment cancelled',
-      template: 'cancellation',
-      context: {
-        provider: appointment.provider.name,
-        user: appointment.user.name,
-        date: format(appointment.date, "'dia' dd 'de' MMMM', ás' H:mm'h'", {
-          locale: pt,
-        }),
-      },
-    })
+    this.Queue.add(new CancellationMail().key, { appointment })
     return appointment
   }
 }
