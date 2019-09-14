@@ -13,13 +13,21 @@ services:
       - '3309:3306'
     container_name: node-starter-mysql
 
-  mongodb:
+  node-starter-mongo:
     image: mongo:latest
     container_name: 'mongodb'
     volumes:
       - .:/usr/data
     ports:
       - 27017:27017
+
+  node-starter-redis:
+    image: redis:latest
+    container_name: 'redis'
+    volumes:
+      - .:/usr/data
+    ports:
+      - 6379:6379
 
   node-starter:
     build: .
@@ -30,3 +38,5 @@ services:
       - .:/usr/app
     depends_on:
       - node-starter-mysql
+      - node-starter-mongo
+      - node-starter-redis

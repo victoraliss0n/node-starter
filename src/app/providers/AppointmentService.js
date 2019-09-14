@@ -96,6 +96,11 @@ export default class AppointmentService {
           as: 'provider',
           attributes: ['name', 'email'],
         },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name', 'email'],
+        },
       ],
     })
     if (appointment.user_id !== userId) {
@@ -108,10 +113,18 @@ export default class AppointmentService {
     appointment.canceled_at = new Date()
     await appointment.update()
     const mail = new MailHelper()
+
     await mail.sendMail({
       to: `${appointment.provider.name} <${appointment.provider.email}>`,
-      subject: 'Agendamento cancelado',
-      text: 'Você tem um novo cancelamento',
+      subject: 'Appointment cancelled',
+      template: 'cancellation',
+      context: {
+        provider: appointment.provider.name,
+        user: appointment.user.name,
+        date: format(appointment.date, "'dia' dd 'de' MMMM', ás' H:mm'h'", {
+          locale: pt,
+        }),
+      },
     })
     return appointment
   }
