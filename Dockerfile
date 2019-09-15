@@ -9,7 +9,6 @@ WORKDIR /usr/app
 # where available (npm@5+)
 COPY package*.json ./
 RUN npm i -g yarn
-RUN yarn i
 
 # Bundle app source
 COPY . .
