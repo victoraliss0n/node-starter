@@ -21,7 +21,7 @@ class Database {
   }
 
   async mongo() {
-    await mongoose.connect('mongodb://mongodb/node-starter-mongodb', {
+    await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
     })
   }
